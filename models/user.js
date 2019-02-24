@@ -5,7 +5,17 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema(
   {
     username: String,
-    password: String
+    password: String,
+    socks: {
+      type: Array,
+      items: {
+        type: Object,
+        properties: {
+          name: String,
+          image: String
+        }
+      }
+    }
   },
   {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
