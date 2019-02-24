@@ -2,6 +2,7 @@ const express = require('express');
 const authRoutes = express.Router();
 const passport = require('passport');
 const ensureLogin = require('connect-ensure-login');
+const isLoggedIn = require('../public/javascripts/isLogged');
 
 // User model
 const User = require('../models/user');
@@ -42,7 +43,7 @@ authRoutes.post('/signup', (req, res, next) => {
         if (err) {
           res.render('auth/signup', { message: 'Something went wrong' });
         } else {
-          res.redirect('/private-page');
+          res.redirect('/profile-page');
         }
       });
     })
@@ -58,24 +59,16 @@ authRoutes.get('/login', (req, res, next) => {
 authRoutes.post(
   '/login',
   passport.authenticate('local', {
-    successRedirect: '/private-page',
+    successRedirect: '/profile-page',
     failureRedirect: '/login',
     failureFlash: true,
     passReqToCallback: true
   })
 );
 
-authRoutes.get('/private-page', isLoggedIn, (req, res) => {
-  res.render('private', { user: req.user });
+authRoutes.get('/profile-page', isLoggedIn, (req, res) => {
+  res.render('profile', { user: req.user });
 });
-
-function isLoggedIn(req, res, next) {
-  console.log('islgoedin', req.isAuthenticated());
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-}
 
 authRoutes.get('/logout', (req, res) => {
   req.logout();
@@ -83,3 +76,4 @@ authRoutes.get('/logout', (req, res) => {
 });
 
 module.exports = authRoutes;
+// module.exports = isLoggedIn();
