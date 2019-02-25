@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const isLoggedIn = require('../public/javascripts/isLogged');
 const User = require('../models/user');
-0;
 
 /* GET home page */
 router.get('/', isLoggedIn, (req, res, next) => {

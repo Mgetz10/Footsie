@@ -1,11 +1,28 @@
-socks bish
-<br>
-{{#each user}}
-{{username}}
-{{/each}}
-<br>
-{{#each userSock}}
-{{name}}
-<img src="./images/testSocks/{{image}}" alt="">
-{{/each}}
+<div class="socks-page-container flex column">
+  socks bish
+  <div class="socks flex column">
+    <div class="users flex full-width">
+      {{#each user}}
+      <div class="name-tag hide">
+        {{username}}
+      </div>
+      {{/each}}
+    </div>
+    <div class="sock-cards flex full-width">
+      {{#each userSock}}
+      <div class="sock-card flex column hide">
+        <span>{{name}}</span>
+        <div class="sock-image-div">
+          <img src="./images/testSocks/{{image}}" alt="">
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <div class='symbols flex'>
+      <span id='match'>&#9825</span>
+      <span id='not-match'>&#10005</spanspan>
+    </div>
+  </div>
+  <div class="footer"></div>
+</div>
 <script src="./javascripts/socks.js"></script>
