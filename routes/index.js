@@ -6,18 +6,33 @@ console.log(isLoggedIn, typeof isLoggedIn);
 const containsSock = require('../public/javascripts/containsSock');
 const User = require('../models/user');
 const Sock = require('../models/socks');
-//require('../public/javascripts/isLogged').logOut();
 /* GET home page */
 router.get('/', isLoggedIn, (req, res, next) => {
   res.render('index');
 });
 
-router.post('/like', isLoggedIn, (req, res, next) => {
-  console.log('the user', req.user, ' liked', req.body);
-  res.json({ burgerking: true });
-  console.log(req.user.socks[0]);
-  Sock.findById(req.user.socks[0]).then(sock => {
+router.post('/match', isLoggedIn, (req, res, next) => {
+  //Add liked sock to array
+  Sock.findById(req.body.currentSock).then(sock => {
+    console.log('whats......', req.body.sockId);
     sock.socksMatching.push(req.body.sockId);
+    sock.save();
+    Sock.findById(req.body.sockId).then(otherSock => {
+      console.log(`othersock: ${otherSock.socksMatching}, sock: ${sock._id}`);
+      if (otherSock.socksMatching.includes(req.body.currentSock)) {
+        res.json({ matchResult: true });
+      } else {
+        res.json({ matchResult: false });
+      }
+    });
+  });
+});
+
+router.post('/notmatch', isLoggedIn, (req, res, next) => {
+  res.json({ burgerking: true });
+  Sock.findById(req.body.currentSock).then(sock => {
+    console.log('whats......', req.body.sockId);
+    sock.socksNotMatching.push(req.body.sockId);
     sock.save();
   });
 });
@@ -44,13 +59,12 @@ router.get('/socks', isLoggedIn, (req, res, next) => {
     // })
     // console.log(sockHandfull);
     Sock.find({
-      _id: { $in: req.user.socks }.then(mySocks => {
-        console.log(mySocks);
-        res.render('socks', {
-          sock: socks,
-          mySocks: mySocks
-        });
-      })
+      user_id: req.user._id
+    }).then(mySocks => {
+      res.render('socks', {
+        sock: socks,
+        mySocks: mySocks
+      });
     });
   });
 });

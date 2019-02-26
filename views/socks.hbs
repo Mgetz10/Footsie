@@ -18,7 +18,14 @@
       <span id='not-match'>&#10005</span>
     </div>
   </div>
-  <div class="footer"></div>
+  <div class="footer flex">
+    {{#each mySocks}}
+    <div class="user-sockcard flex column" id={{name}}>
+      <img src="./images/testSocks/{{image}}" alt="">
+      <secret class="id" id={{_id}}></secret>
+    </div>
+    {{/each}}
+  </div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="./javascripts/socks.js"></script>

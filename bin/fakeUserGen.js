@@ -8,8 +8,15 @@ const bcryptSalt = 10;
 const dbName = 'footsie';
 mongoose.connect(`mongodb://localhost/${dbName}`);
 
+// Sock.deleteMany({})
+//   .then()
+//   .catch();
+// User.deleteMany({})
+//   .then()
+//   .catch();
+
 sockCounter = 0;
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 6; i++) {
   let password = String(i);
   const salt = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
@@ -23,13 +30,13 @@ for (let i = 0; i < 100; i++) {
     const fakeSock = new Sock({
       user_id: newUser._id,
       sockOwner: newUser.username,
-      name: `Sock 1`,
+      name: `Sock-1`,
       image: `${sockCounter}.jpeg`
     });
     const fakeSock2 = new Sock({
       user_id: newUser._id,
       sockOwner: newUser.username,
-      name: `Sock 2`,
+      name: `Sock-2`,
       image: `${sockCounter + 1}.jpeg`
     });
     fakeSock.save().then(newSock => {

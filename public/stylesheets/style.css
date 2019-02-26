@@ -73,4 +73,13 @@ body {
 .id {
   display: none; }
 
+.footer {
+  height: 20%; }
+
+.user-sockcard {
+  height: 100%; }
+
+.user-sockcard img {
+  max-height: 100%; }
+
 /*# sourceMappingURL=style.css.map */

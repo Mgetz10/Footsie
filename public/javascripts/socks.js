@@ -17,22 +17,54 @@ const notMatch = document.getElementById('not-match');
 const nextCard = () => {
   sockCards.shift().classList.add('hide');
   sockCards[0].classList.remove('hide');
-  console.log(sockCards[0]);
 };
 const isMatch = () => {
-  console.log('lilke');
   axios
-    .post('/like', { sockId: sockCards[0].children[3].innerText })
+    .post('/match', {
+      sockId: sockCards[0].children[3].innerText,
+      currentSock: currentSock
+    })
     .then(responseFromServer => {
-      console.log(responseFromServer.data);
+      if (responseFromServer.data.matchResult) {
+        alert("it's a match!!");
+      }
+      console.log(responseFromServer.data.matchResult);
     });
-  console.log(sockCards[0].children[3].innerText);
   nextCard();
 };
 const isNotMatch = () => {
-  console.log(sockCards[0].children[3].innerText);
+  axios
+    .post('/notmatch', {
+      sockId: sockCards[0].children[3].innerText,
+      currentSock: currentSock
+    })
+    .then(responseFromServer => {
+      console.log(responseFromServer.data);
+    });
   nextCard();
 };
 
 match.addEventListener('click', isMatch, false);
 notMatch.addEventListener('click', isNotMatch, false);
+
+const sockOne = document.getElementById('Sock-1');
+const sockTwo = document.getElementById('Sock-2');
+
+sockOneId = sockOne.children[1].id;
+sockTwoId = sockTwo.children[1].id;
+let currentSock = sockOne.children[1].id;
+
+sockOne.addEventListener(
+  'click',
+  () => {
+    currentSock = sockOneId;
+  },
+  false
+);
+sockTwo.addEventListener(
+  'click',
+  () => {
+    currentSock = sockTwoId;
+  },
+  false
+);
