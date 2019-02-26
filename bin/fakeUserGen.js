@@ -1,25 +1,53 @@
 const mongoose = require('mongoose');
 const User = require('../models/user');
+const Sock = require('../models/socks');
+
+const bcrypt = require('bcrypt');
+const bcryptSalt = 10;
 
 const dbName = 'footsie';
 mongoose.connect(`mongodb://localhost/${dbName}`);
 
 sockCounter = 0;
 for (let i = 0; i < 100; i++) {
+  let password = String(i);
+  const salt = bcrypt.genSaltSync(bcryptSalt);
+  const hashPass = bcrypt.hashSync(password, salt);
+
   const fakeUser = new User({
     username: `fakeUser${i}`,
-    password: i,
-    socks: [
-      {
-        name: `Sock 1`,
-        image: `${sockCounter}.jpeg`
-      },
-      {
-        name: `Sock 2`,
-        image: `${sockCounter + 1}.jpeg`
-      }
-    ]
+    password: hashPass
   });
-  fakeUser.save();
-  sockCounter = (sockCounter + 2) % 20;
+
+  fakeUser.save().then(newUser => {
+    const fakeSock = new Sock({
+      user_id: newUser._id,
+      sockOwner: newUser.username,
+      name: `Sock 1`,
+      image: `${sockCounter}.jpeg`
+    });
+    const fakeSock2 = new Sock({
+      user_id: newUser._id,
+      sockOwner: newUser.username,
+      name: `Sock 2`,
+      image: `${sockCounter + 1}.jpeg`
+    });
+    fakeSock.save().then(newSock => {
+      User.findById(newUser._id).then(user => {
+        user.socks.push(newSock._id);
+        user.save();
+      });
+    });
+    fakeSock2.save().then(newSock => {
+      User.findById(newUser._id).then(user => {
+        user.socks.push(newSock._id);
+        user.save();
+      });
+    });
+    // fakeSock2.save().then(newSock2 => {
+    //   newUser.socks.push(newSock2._id);
+    //   newUser.save();
+    // });
+    sockCounter = (sockCounter + 2) % 20;
+  });
 }

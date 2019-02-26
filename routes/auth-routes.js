@@ -2,7 +2,7 @@ const express = require('express');
 const authRoutes = express.Router();
 const passport = require('passport');
 const ensureLogin = require('connect-ensure-login');
-const isLoggedIn = require('../public/javascripts/isLogged');
+const isLoggedIn = require('../public/javascripts/isLogged').isLoggedIn;
 
 // User model
 const User = require('../models/user');

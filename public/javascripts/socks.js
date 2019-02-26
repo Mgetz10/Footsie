@@ -1,24 +1,37 @@
-const domNameTags = document.getElementsByClassName('name-tag');
+//Main functionality
+
+//capture Sock cards and add to array
 const domSockCards = document.getElementsByClassName('sock-card');
-let nameTags = [].slice.call(domNameTags);
 let sockCards = [].slice.call(domSockCards);
 
-nameTags[0].classList.remove('hide');
+const checkCards = () => {
+  for (sock of sockCards) {
+    console.log(sock.innerText);
+  }
+};
+
 sockCards[0].classList.remove('hide');
 
 const match = document.getElementById('match');
 const notMatch = document.getElementById('not-match');
-const isMatch = () => {
-  nameTags.shift().classList.add('hide');
+const nextCard = () => {
   sockCards.shift().classList.add('hide');
-  nameTags[0].classList.remove('hide');
   sockCards[0].classList.remove('hide');
+  console.log(sockCards[0]);
+};
+const isMatch = () => {
+  console.log('lilke');
+  axios
+    .post('/like', { sockId: sockCards[0].children[3].innerText })
+    .then(responseFromServer => {
+      console.log(responseFromServer.data);
+    });
+  console.log(sockCards[0].children[3].innerText);
+  nextCard();
 };
 const isNotMatch = () => {
-  nameTags.shift();
-  sockCards.shift();
-  nameTags[0].classList.remove('hide');
-  sockCards[0].classList.remove('hide');
+  console.log(sockCards[0].children[3].innerText);
+  nextCard();
 };
 
 match.addEventListener('click', isMatch, false);

@@ -1,28 +1,24 @@
 <div class="socks-page-container flex column">
-  socks bish
+  <h3>Footsie</h3>
   <div class="socks flex column">
-    <div class="users flex full-width">
-      {{#each user}}
-      <div class="name-tag hide">
-        {{username}}
-      </div>
-      {{/each}}
-    </div>
     <div class="sock-cards flex full-width">
-      {{#each userSock}}
-      <div class="sock-card flex column hide">
+      {{#each sock}}
+      <div class="sock-card flex column hide" data-sockid={{_id}}>
+        <span>{{sockOwner}}</span>
         <span>{{name}}</span>
         <div class="sock-image-div">
           <img src="./images/testSocks/{{image}}" alt="">
         </div>
+        <secret class="id">{{_id}}</secret>
       </div>
       {{/each}}
     </div>
     <div class='symbols flex'>
       <span id='match'>&#9825</span>
-      <span id='not-match'>&#10005</spanspan>
+      <span id='not-match'>&#10005</span>
     </div>
   </div>
   <div class="footer"></div>
 </div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="./javascripts/socks.js"></script>

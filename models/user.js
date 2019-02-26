@@ -6,16 +6,7 @@ const userSchema = new Schema(
   {
     username: String,
     password: String,
-    socks: {
-      type: Array,
-      items: {
-        type: Object,
-        properties: {
-          name: String,
-          image: String
-        }
-      }
-    }
+    socks: [String]
   },
   {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }

@@ -9,7 +9,7 @@ body {
 }
 
 body {
-  padding: 50px;
+  padding: 5% 3%;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
@@ -77,13 +77,17 @@ body {
   display: flex;
   justify-content: center;
   font-size: 5rem;
+  width: 80%;
 }
 
 .symbols span {
-  margin: 0 55%;
-  width: 100%;
+  width: 45%;
 }
 
 .symbols span:hover {
   cursor: pointer;
+}
+
+.id {
+  display: none;
 }

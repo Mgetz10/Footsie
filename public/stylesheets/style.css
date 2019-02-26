@@ -7,7 +7,7 @@ body {
   height: 100%; }
 
 body {
-  padding: 50px;
+  padding: 5% 3%;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif; }
 
 .socks-page-container a {
@@ -47,7 +47,7 @@ body {
 
 .name-tag {
   font-size: 2rem;
-  width: 33%; }
+  width: 100%; }
 
 .sock-card {
   width: 33%;
@@ -61,12 +61,16 @@ body {
 .symbols {
   display: flex;
   justify-content: center;
-  font-size: 5rem; }
+  font-size: 5rem;
+  width: 80%; }
 
 .symbols span {
-  margin: 0 55%; }
+  width: 45%; }
 
 .symbols span:hover {
   cursor: pointer; }
+
+.id {
+  display: none; }
 
 /*# sourceMappingURL=style.css.map */
