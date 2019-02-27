@@ -30,37 +30,63 @@ router.post('/match', isLoggedIn, (req, res, next) => {
 
 router.post('/notmatch', isLoggedIn, (req, res, next) => {
   res.json({ burgerking: true });
-  Sock.findById(req.body.currentSock).then(sock => {
+  User.findById(req.user._id).then(user => {
     console.log('whats......', req.body.sockId);
-    sock.socksNotMatching.push(req.body.sockId);
-    sock.save();
+    user.socksNotMatching.push(req.body.sockId);
+    user.save();
   });
 });
 //
 router.get('/socks', isLoggedIn, (req, res, next) => {
   Sock.aggregate([{ $sample: { size: 200 } }]).then(sockHandfull => {
     let socks = [];
-    console.log(req.user._id);
-    for (sock of sockHandfull) {
-      // User.findById(sock.user_id).then(user => {
-
-      // Check if card not current user
-      if (sock.user_id === req.user._id) {
-        continue;
-      }
-      // // Check if user has already matched
-      // if (){}
-      // // Check if user has already disliked sock
-      // if (){}
-      // // Check if other user has disliked current user
-      // if (){}
-      socks.push(sock);
-    }
-    // })
-    // console.log(sockHandfull);
     Sock.find({
       user_id: req.user._id
     }).then(mySocks => {
+      for (sock of sockHandfull) {
+        // User.findById(sock.user_id).then(user => {
+
+        // Check if card not current user
+        if (sock.user_id === req.user._id) {
+          continue;
+        }
+
+        // // Check if user has already disliked sock
+        if (req.user.socksNotMatching.includes(String(sock._id))) {
+          continue;
+        }
+
+        // Check if user has already matched
+        console.log(
+          'piss and shit',
+          mySocks,
+          'poo poo and pee pee',
+          sock.socksMatching
+        );
+        if (sock.socksMatching.includes(String)) {
+          continue;
+        }
+
+        /*  NEW APPROACH NEEDED (CHECK BEFORE FOR LOOP?)
+        // Check if other user has disliked current user
+        let allSocksNotMatching = true;
+        User.findById(sock.user_id).then(thisUser => {
+          for (mySock of mySocks) {
+            if (!thisUser.socksNotMatching.includes(mySock)) {
+              allSocksNotMatching = false;
+              break;
+            }
+          }
+        });
+
+        if (allSocksNotMatching) {
+          console.log('urDUMN');
+          continue;
+        }
+        */
+
+        socks.push(sock);
+      }
       res.render('socks', {
         sock: socks,
         mySocks: mySocks

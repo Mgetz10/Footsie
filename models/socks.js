@@ -11,8 +11,7 @@ const socksSchema = new Schema(
       type: String,
       default: '1.jpeg'
     },
-    socksMatching: [String],
-    socksNotMatching: [String]
+    socksMatching: [String]
   },
   {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
