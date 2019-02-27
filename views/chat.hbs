@@ -1,0 +1,13 @@
+<div class="chat-container flex column">
+  <div class="messages">
+    {{#each chat}}
+    test message
+    {{/each}}
+  </div>
+  <div class="input">
+    <input type="text" id="new-message">
+    <button id="send-button">Send</button>
+  </div>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="./javascripts/chat.js"></script>

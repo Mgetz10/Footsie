@@ -66,10 +66,6 @@ authRoutes.post(
   })
 );
 
-authRoutes.get('/profile-page', isLoggedIn, (req, res) => {
-  res.render('profile', { user: req.user });
-});
-
 authRoutes.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/login');

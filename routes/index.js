@@ -6,9 +6,20 @@ console.log(isLoggedIn, typeof isLoggedIn);
 const containsSock = require('../public/javascripts/containsSock');
 const User = require('../models/user');
 const Sock = require('../models/socks');
+const Chat = require('../models/chat');
+
 /* GET home page */
 router.get('/', isLoggedIn, (req, res, next) => {
   res.render('index');
+});
+
+router.get('/profile-page', isLoggedIn, (req, res) => {
+  Chat.find({ user_ids: req.user._id }).then(chats => {
+    res.render('profile', {
+      user: req.user,
+      chats: chats
+    });
+  });
 });
 
 router.post('/match', isLoggedIn, (req, res, next) => {
@@ -20,6 +31,21 @@ router.post('/match', isLoggedIn, (req, res, next) => {
     Sock.findById(req.body.sockId).then(otherSock => {
       console.log(`othersock: ${otherSock.socksMatching}, sock: ${sock._id}`);
       if (otherSock.socksMatching.includes(req.body.currentSock)) {
+        let chat = new Chat();
+        chat.matchingSocks.push(otherSock.image, sock.image);
+        chat.user_ids.push(sock.user_id, otherSock.user_id);
+        chat.save().then(room => {
+          console.log('save this ', room._id, ' to each user');
+          User.findById(sock.user_id).then(sockUser => {
+            sockUser.chats.push(room._id);
+            sockUser.save();
+          });
+          User.findById(otherSock.user_id).then(sockUser => {
+            sockUser.chats.push(room._id);
+            sockUser.save();
+          });
+        });
+
         res.json({ matchResult: true });
       } else {
         res.json({ matchResult: false });
@@ -95,8 +121,12 @@ router.get('/socks', isLoggedIn, (req, res, next) => {
   });
 });
 
-// router.get('/', (req, res, next) => {
-//   res.render('index');
-// });
+router.get('/chat/:chatId', (req, res, next) => {
+  Chat.findById(req.params.chatId)
+    .then(chat => {
+      res.render('chat', { chat: chat });
+    })
+    .catch(err => console.log(err));
+});
 
 module.exports = router;

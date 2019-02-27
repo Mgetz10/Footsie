@@ -13,17 +13,6 @@ body {
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
-.socks-page-container a {
-  color: #00b7ff;
-  display: block;
-  text-decoration: none;
-}
-
-.socks-page-container img,
-.socks-page-container span {
-  display: block;
-}
-
 .flex {
   display: flex;
   justify-content: center;
@@ -40,6 +29,22 @@ body {
 
 .hide {
   display: none;
+}
+
+.profile-container {
+  justify-content: space-between;
+  height: 100%;
+}
+
+.socks-page-container a {
+  color: #00b7ff;
+  display: block;
+  text-decoration: none;
+}
+
+.socks-page-container img,
+.socks-page-container span {
+  display: block;
 }
 
 .socks-page-container {
@@ -102,4 +107,9 @@ body {
 
 .user-sockcard img {
   max-height: 100%;
+}
+
+.chat-container {
+  justify-content: space-between;
+  height: 100%;
 }

@@ -7,7 +7,8 @@ const userSchema = new Schema(
     username: String,
     password: String,
     socks: [String],
-    socksNotMatching: [String]
+    socksNotMatching: [String],
+    chats: [String]
   },
   {
     timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
