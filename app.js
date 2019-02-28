@@ -20,7 +20,9 @@ const flash = require('connect-flash');
 mongoose.Promise = Promise;
 mongoose
   .connect(
-    'mongodb+srv://Monroe:Monroe@cluster0-7erhe.mongodb.net/test?retryWrites=true',
+    `mongodb+srv://Monroe:${
+      process.env.DBPASS
+    }@cluster0-7erhe.mongodb.net/test?retryWrites=true`,
     { useNewUrlParser: true }
   )
   .then(x => {
