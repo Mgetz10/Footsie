@@ -1,7 +1,10 @@
 <div class="chat-container flex column">
-  <div class="messages">
-    {{#each chat}}
-    test message
+  <div id="dom-messages">
+    {{#each chat.messages}}
+    <div class="message">
+      {{user}}
+      {{message}}
+    </div>
     {{/each}}
   </div>
   <div class="input">
@@ -10,4 +13,4 @@
   </div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="./javascripts/chat.js"></script>
+<script src="../../javascripts/chat.js"></script>

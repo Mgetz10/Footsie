@@ -15,6 +15,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('./models/user');
 const app = express();
 const flash = require('connect-flash');
+//hbs.registerHelper("json", JSON.stringify(context){})
 
 mongoose.Promise = Promise;
 mongoose

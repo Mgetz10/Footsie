@@ -121,12 +121,31 @@ router.get('/socks', isLoggedIn, (req, res, next) => {
   });
 });
 
-router.get('/chat/:chatId', (req, res, next) => {
+router.get('/chat/:chatId', isLoggedIn, (req, res, next) => {
   Chat.findById(req.params.chatId)
     .then(chat => {
       res.render('chat', { chat: chat });
     })
     .catch(err => console.log(err));
+});
+
+router.post('/messages', isLoggedIn, (req, res, next) => {
+  const newMessage = {
+    user: req.user.username,
+    message: req.body.newMessage
+  };
+  Chat.findById(req.body.chatID).then(chat => {
+    chat.messages.push(newMessage);
+    chat.save().then(() => {
+      res.send(newMessage);
+    });
+  });
+});
+
+router.post('/update', isLoggedIn, (req, res, next) => {
+  Chat.findById(req.body.chatID).then(chatMessages => {
+    res.send(chatMessages.messages);
+  });
 });
 
 module.exports = router;
