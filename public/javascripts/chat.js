@@ -41,4 +41,4 @@ const updateMessages = () => {
     // console.log(newMessages.length !== domMessages.childElementCount);
   });
 };
-setInterval(updateMessages, 500);
+setInterval(updateMessages, 100);

@@ -19,7 +19,10 @@ const flash = require('connect-flash');
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/footsie', { useNewUrlParser: true })
+  .connect(
+    'mongodb+srv://Monroe:Monroe@cluster0-7erhe.mongodb.net/test?retryWrites=true',
+    { useNewUrlParser: true }
+  )
   .then(x => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`

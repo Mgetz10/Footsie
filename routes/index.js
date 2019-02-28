@@ -34,6 +34,7 @@ router.post('/match', isLoggedIn, (req, res, next) => {
         let chat = new Chat();
         chat.matchingSocks.push(otherSock.image, sock.image);
         chat.user_ids.push(sock.user_id, otherSock.user_id);
+        chat.usernames.push(sock.sockOwner, otherSock.sockOwner);
         chat.save().then(room => {
           console.log('save this ', room._id, ' to each user');
           User.findById(sock.user_id).then(sockUser => {
