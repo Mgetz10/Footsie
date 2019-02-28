@@ -14,7 +14,9 @@ router.get('/', isLoggedIn, (req, res, next) => {
 });
 
 router.get('/profile-page', isLoggedIn, (req, res) => {
+  console.log('hey');
   Chat.find({ user_ids: req.user._id }).then(chats => {
+    console.log('in chats', req.user);
     res.render('profile', {
       user: req.user,
       chats: chats
