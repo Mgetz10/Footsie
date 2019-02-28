@@ -1,0 +1,27 @@
+<div class="profile-container flex column">
+  <div class="nav flex">
+    Profile
+    <a href="/logout">Logout</a>
+    <a href="/socks">Find your match!</a>
+  </div>
+  <div class="profile-main">
+    {{#if user}}
+    <div>
+      <a href="/">Index</a>
+    </div>
+    {{/if}}
+  </div>
+  <div class="footer flex">
+    {{#each chats}}
+    <a href="/chat/{{_id}}">
+      <div class="matching-socks flex">
+        {{#each matchingSocks}}
+        <div class="each-sock">
+          <img src="./images/testSocks/{{this}}" alt="">
+        </div>
+        {{/each}}
+      </div>
+    </a>
+    {{/each}}
+  </div>
+</div>
