@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const utils = require('../public/javascripts/isLogged');
 const isLoggedIn = utils.isLoggedIn;
-console.log(isLoggedIn, typeof isLoggedIn);
+const uploadCloud = require('../config/cloudinary.js');
 const containsSock = require('../public/javascripts/containsSock');
 const User = require('../models/user');
 const Sock = require('../models/socks');
@@ -14,12 +14,14 @@ router.get('/', isLoggedIn, (req, res, next) => {
 });
 
 router.get('/profile-page', isLoggedIn, (req, res) => {
-  console.log('hey');
-  Chat.find({ user_ids: req.user._id }).then(chats => {
-    console.log('in chats', req.user);
-    res.render('myprofile.hbs', {
-      user: req.user,
-      chats: chats
+  Sock.find({ user_id: req.user._id }).then(profileSocks => {
+    Chat.find({ user_ids: req.user._id }).then(chats => {
+      console.log('in chats', req.user);
+      res.render('myprofile.hbs', {
+        socks: profileSocks,
+        user: req.user,
+        chats: chats
+      });
     });
   });
 });
