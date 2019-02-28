@@ -15,7 +15,7 @@ router.get('/', isLoggedIn, (req, res, next) => {
 
 router.get('/profile-page', isLoggedIn, (req, res) => {
   Chat.find({ user_ids: req.user._id }).then(chats => {
-    res.render('profile.hbs', {
+    res.render('profile', {
       user: req.user,
       chats: chats
     });
