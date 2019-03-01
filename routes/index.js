@@ -16,7 +16,7 @@ router.get('/', isLoggedIn, (req, res, next) => {
 router.get('/profile-page', isLoggedIn, (req, res) => {
   Sock.find({ user_id: req.user._id }).then(profileSocks => {
     Chat.find({ user_ids: req.user._id }).then(chats => {
-      console.log('in chats', req.user);
+      // console.log('in chats', req.user);
       res.render('myprofile.hbs', {
         socks: profileSocks,
         user: req.user,
@@ -34,16 +34,27 @@ router.post('/addsock', uploadCloud.single('photo'), (req, res, next) => {
     name: `Sock-${req.user.socks.length + 1}`,
     image: req.file.url
   });
-
-  newSock.save().then(myNewSock => {
-    User.findById(req.user._id).then(me => {
-      me.socks.push(myNewSock._id);
-    });
-  });
-  console.log('ok?', req.file.url);
-  //save to db
-
+  newSock.save();
   res.redirect('/profile-page');
+});
+
+router.post('/removesock', (req, res, next) => {
+  //uploadCloud.single(url)
+  console.log(req.body.sockId);
+  Sock.findById(req.body.sockId)
+    .then(sockToDelete => {
+      console.log('broke sock');
+      User.findById(sockToDelete.user_id).then(sockToDeleteUser => {
+        console.log('broke user');
+        sockToDeleteUser
+          .update({ $pull: { socks: sockToDeleteUser._id } })
+          .then(() => {
+            sockToDelete.remove().exec();
+          });
+      });
+    })
+    .then(res.send('coolshit'));
+  //save to db
 });
 
 router.post('/match', isLoggedIn, (req, res, next) => {

@@ -21,7 +21,7 @@ const nextCard = () => {
 const isMatch = () => {
   axios
     .post('/match', {
-      sockId: sockCards[0].children[3].innerText,
+      sockId: sockCards[0].children[2].innerText,
       currentSock: currentSock
     })
     .then(responseFromServer => {

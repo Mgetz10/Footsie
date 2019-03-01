@@ -39,6 +39,30 @@ const creatSockForm = () => {
   newForm.appendChild(newButton);
   newSockDiv.appendChild(newForm);
 };
+const userSockCards = document.getElementsByClassName('user-sockcard');
+for (let i = 0; i < userSockCards.length; i++) {
+  const deleteButton = document.createElement('span');
+  const deleteSymbol = document.createTextNode('X');
+  deleteButton.setAttribute('class', 'delete');
+  deleteButton.appendChild(deleteSymbol);
+
+  userSockCards[i].addEventListener('mouseenter', () => {
+    userSockCards[i].appendChild(deleteButton);
+    deleteButton.addEventListener('click', () => {
+      axios
+        .post('/removesock', {
+          sockId: userSockCards[i].lastElementChild.id
+        })
+        .then(response => {
+          console.log(response.data);
+          userSockCards[i].parentElement.removeChild(userSockCards[i]);
+        });
+    });
+  });
+  userSockCards[i].addEventListener('mouseleave', () => {
+    userSockCards[i].removeChild(deleteButton);
+  });
+}
 // const addNewSock = () => {
 //   let url = prompt('Please enter your picture url', 'URL');
 //   axios

@@ -1,17 +1,22 @@
-<form action="/login" method="POST">
-  <div>
-    <label for="username">Username:</label>
-    <input type="text" name="username">
-  </div>
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" name="password">
-  </div>
-  {{#if message}}
-  <div class="error-message">{{ message }}</div>
-  {{/if}}
-  <div>
-    <input type="submit" value="Log In">
-  </div>
-</form>
-Don't have an account? <a href="/signup">Signup</a>!
+<div class="login-container flex column">
+  <h2>Login</h2>
+  <form action="/login" method="POST">
+    <div class="inputs">
+      <label for="username">Username:</label>
+      <input type="text" name="username">
+    </div>
+    <div class="inputs">
+      <label for="password">Password:</label>
+      <input type="password" name="password">
+    </div>
+    {{#if message}}
+    <div class="error-message">{{ message }}</div>
+    {{/if}}
+    <div>
+      <input type="submit" value="Log In" class="login-button">
+    </div>
+    <p>
+      Don't have an account? <a href="/signup">Signup</a>!
+    </p>
+  </form>
+</div>

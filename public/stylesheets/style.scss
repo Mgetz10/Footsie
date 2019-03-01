@@ -3,13 +3,18 @@
   box-sizing: border-box;
 }
 
+html {
+  background: gray;
+}
+
 html,
 body {
   height: 100%;
 }
 
 body {
-  padding: 5% 3%;
+  background: #ffe7e7;
+  padding: 3% 2%;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
@@ -31,11 +36,164 @@ body {
   display: none;
 }
 
+.signup-container {
+  color: teal;
+  height: 100%;
+  width: 100%;
+}
+
+.signup-container form {
+  height: 70%;
+}
+.signup-container input {
+  background: white;
+}
+
+.signup-container button {
+  background: teal;
+  color: white;
+  border: solid #80808066 1px;
+  border-radius: 5px;
+  height: 6%;
+  font-size: 1rem;
+}
+
+.error-message {
+  margin-top: 4%;
+}
+
+.signup-container h2 {
+  margin-bottom: 5%;
+}
+
+.signup-container p {
+  margin-top: 4%;
+}
+
+.login-container {
+  color: teal;
+  height: 100%;
+  width: 100%;
+}
+
+.login-container h2 {
+  margin-bottom: 5%;
+}
+
+.login-container form {
+  height: 70%;
+}
+
+.login-container .login-button {
+  margin-top: 4%;
+  background: teal;
+  color: white;
+  border: solid #80808066 1px;
+  border-radius: 5px;
+  height: 6%;
+  font-size: 1rem;
+}
+
+.inputs {
+  margin: 2% 0;
+}
+
+.login-container p {
+  margin-top: 4%;
+}
+
 .profile-container {
   justify-content: space-between;
   height: 100%;
 }
 
+.profile-user-sockcard {
+  height: 100%;
+  width: 44%;
+}
+.profile-user-sockcard img {
+  border-radius: 50%;
+  max-height: 100%;
+  max-width: 100%;
+  box-shadow: 0 0 20px grey;
+}
+
+.nav {
+  height: 56%;
+  justify-content: space-between;
+}
+
+.next-nav {
+  justify-content: space-between;
+}
+
+.next-nav a {
+  width: 30%;
+  text-decoration: none;
+  color: teal;
+}
+
+.nav h3 {
+  font-size: 1.3rem;
+  color: teal;
+}
+
+.your-socks {
+  background: white;
+  overflow: scroll;
+  height: 80%;
+  box-shadow: 0px 0px 6px 1px #00000052;
+}
+
+.profile-footer {
+  overflow: scroll;
+  height: 30%;
+  justify-content: space-between;
+}
+
+.profile-footer h3 {
+  color: teal;
+}
+
+.matching-socks {
+  height: 80%;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 0 14px #8080804d;
+  margin: 1%;
+}
+
+.match-block {
+  background: white;
+  height: 79%;
+  width: 50%;
+  overflow: hidden;
+  border-radius: 43px;
+  border-style: solid;
+  border-width: 4px;
+  border-color: #00000036;
+  padding: 3%;
+  box-shadow: 0 0 6px 2px #00000094;
+}
+
+.match-block:hover {
+  border-color: black;
+}
+
+.match-block a {
+  width: 100%;
+}
+
+.each-sock {
+  width: 50%;
+}
+
+.each-sock img {
+  display: block;
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 17px;
+}
 .socks-page-container a {
   color: #00b7ff;
   display: block;
@@ -47,6 +205,10 @@ body {
   display: block;
 }
 
+.delete {
+  position: absolute;
+}
+
 .socks-page-container {
   text-align: center;
   height: 100%;
@@ -54,7 +216,12 @@ body {
 }
 
 .socks {
+  background: white;
+  border: solid 1px gray;
+  border-radius: 12px;
+  box-shadow: 0 0 14px #8080806b;
   width: 90%;
+  height: 65%;
   justify-content: space-between;
 }
 
@@ -67,15 +234,31 @@ body {
   width: 100%;
 }
 
+.sock-cards {
+  height: 90%;
+}
+
 .sock-card {
-  width: 33%;
   height: 100%;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .sock-card span {
-  margin-bottom: 8%;
+  color: teal;
   font-size: 1.3rem;
+  margin-top: 7%;
+}
+
+#add-new-sock-div {
+  width: 10%;
+  justify-content: flex-end;
+}
+
+#add-new-sock {
+  font-size: 10rem;
+  width: 100%;
+  text-shadow: 0 0 9px grey;
+  color: green;
 }
 
 .symbols {
@@ -87,6 +270,7 @@ body {
 
 .symbols span {
   width: 45%;
+  color: teal;
 }
 
 .symbols span:hover {
@@ -98,15 +282,29 @@ body {
 }
 
 .footer {
-  height: 20%;
+  justify-content: space-evenly;
+  width: 90%;
+  height: 22%;
+  padding: 2% 1%;
+  border-radius: 10px;
+  box-shadow: 0 0 8px #80808078;
+  background: white;
+  border: solid 1px #808080c4;
 }
 
 .user-sockcard {
   height: 100%;
 }
 
+.socks-page-container h3 {
+  font-size: 1.3rem;
+  color: teal;
+}
+
 .user-sockcard img {
+  border-radius: 50%;
   max-height: 100%;
+  box-shadow: 0 0 7px grey;
 }
 
 .chat-container {

@@ -1,39 +1,36 @@
 <div class="profile-container flex column">
-  <div class="nav flex column">
-    <div class="next-nav flex">
+  <div class="nav flex column full-width">
+    <div class="next-nav flex full-width">
       <a href="/logout">Logout</a>
+      <h3>Footsie</h3>
       <a href="/socks">Find your match!</a>
     </div>
-    <div class="your-socks flex">
+    <div class="your-socks flex full-width">
       {{#each socks}}
-      <div class="user-sockcard flex" id={{name}}>
+      <div class="profile-user-sockcard flex" id={{name}}>
         <img src={{image}} alt="">
         <secret class="id" id={{_id}}></secret>
       </div>
       {{/each}}
-      <div id="add-new-sock-div" class="flex">
+      <div id="add-new-sock-div" class="user-sockcard flex">
         <span id="add-new-sock">+</span>
       </div>
     </div>
   </div>
-  <div class="profile-main">
-    {{#if user}}
-    <div>
-      <a href="/">Index</a>
-    </div>
-    {{/if}}
-  </div>
-  <div class="footer flex">
+  <div class="profile-footer flex full-width column">
+    <h3>Your Matches!!</h3>
     {{#each chats}}
-    <a href="/chat/{{_id}}">
-      <div class="matching-socks flex">
-        {{#each matchingSocks}}
-        <div class="each-sock">
-          <img src={{this}} alt="">
-        </div>
-        {{/each}}
+    <div class="matching-socks flex full-width">
+      <div class="match-block flex">
+        <a href="/chat/{{_id}}" class="flex">
+          {{#each matchingSocks}}
+          <div class="each-sock">
+            <img src={{this}} alt="">
+          </div>
+          {{/each}}
+        </a>
       </div>
-    </a>
+    </div>
     {{/each}}
   </div>
 </div>

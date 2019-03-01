@@ -3,12 +3,11 @@
   <div class="socks flex column">
     <div class="sock-cards flex full-width">
       {{#each sock}}
-      <div class="sock-card flex column hide" data-sockid={{_id}}>
-        <span>{{sockOwner}}</span>
-        <span>{{name}}</span>
+      <div class="sock-card flex column hide full-width" data-sockid={{_id}}>
         <div class="sock-image-div">
           <img src={{image}} alt="">
         </div>
+        <span>{{sockOwner}}</span>
         <secret class="id">{{_id}}</secret>
       </div>
       {{/each}}
