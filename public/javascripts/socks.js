@@ -35,7 +35,7 @@ const isMatch = () => {
 const isNotMatch = () => {
   axios
     .post('/notmatch', {
-      sockId: sockCards[0].children[3].innerText,
+      sockId: sockCards[0].children[2].innerText,
       currentSock: currentSock
     })
     .then(responseFromServer => {

@@ -25,7 +25,7 @@ for (let i = 0; i < 6; i++) {
   const hashPass = bcrypt.hashSync(password, salt);
 
   const fakeUser = new User({
-    username: `fakeUser${i}`,
+    username: `LonelySock${i}`,
     password: hashPass
   });
 
