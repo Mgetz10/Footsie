@@ -21,10 +21,6 @@ const sendMessage = () => {
     })
     .then(response => {
       newMessage.value = '';
-      console.log(response.data.message);
-
-      // console.log(response.data);
-      console.log(newMessage.value, chatID);
     });
 };
 sendButton.addEventListener('click', sendMessage, false);

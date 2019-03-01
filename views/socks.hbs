@@ -7,7 +7,7 @@
         <span>{{sockOwner}}</span>
         <span>{{name}}</span>
         <div class="sock-image-div">
-          <img src="./images/testSocks/{{image}}" alt="">
+          <img src={{image}} alt="">
         </div>
         <secret class="id">{{_id}}</secret>
       </div>
@@ -21,7 +21,7 @@
   <div class="footer flex">
     {{#each mySocks}}
     <div class="user-sockcard flex column" id={{name}}>
-      <img src="./images/testSocks/{{image}}" alt="">
+      <img src={{image}} alt="">
       <secret class="id" id={{_id}}></secret>
     </div>
     {{/each}}

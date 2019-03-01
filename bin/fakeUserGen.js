@@ -5,8 +5,11 @@ const Sock = require('../models/socks');
 const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 
-const dbName = 'footsie';
-mongoose.connect(`mongodb://localhost/${dbName}`);
+// const dbName = 'footsie';
+mongoose.connect(
+  `mongodb+srv://Monroe:Monroe@cluster0-7erhe.mongodb.net/test?retryWrites=true`,
+  { useNewUrlParser: true }
+);
 
 // Sock.deleteMany({})
 //   .then()
@@ -31,13 +34,13 @@ for (let i = 0; i < 6; i++) {
       user_id: newUser._id,
       sockOwner: newUser.username,
       name: `Sock-1`,
-      image: `${sockCounter}.jpeg`
+      image: `./images/testSocks/${sockCounter}.jpeg`
     });
     const fakeSock2 = new Sock({
       user_id: newUser._id,
       sockOwner: newUser.username,
       name: `Sock-2`,
-      image: `${sockCounter + 1}.jpeg`
+      image: `./images/testSocks/${sockCounter + 1}.jpeg`
     });
     fakeSock.save().then(newSock => {
       User.findById(newUser._id).then(user => {

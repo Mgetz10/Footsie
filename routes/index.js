@@ -26,6 +26,26 @@ router.get('/profile-page', isLoggedIn, (req, res) => {
   });
 });
 
+router.post('/addsock', uploadCloud.single('photo'), (req, res, next) => {
+  //uploadCloud.single(url)
+  const newSock = new Sock({
+    user_id: req.user._id,
+    sockOwner: req.user.username,
+    name: `Sock-${req.user.socks.length + 1}`,
+    image: req.file.url
+  });
+
+  newSock.save().then(myNewSock => {
+    User.findById(req.user._id).then(me => {
+      me.socks.push(myNewSock._id);
+    });
+  });
+  console.log('ok?', req.file.url);
+  //save to db
+
+  res.redirect('/profile-page');
+});
+
 router.post('/match', isLoggedIn, (req, res, next) => {
   //Add liked sock to array
   Sock.findById(req.body.currentSock).then(sock => {

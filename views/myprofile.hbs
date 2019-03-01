@@ -7,11 +7,11 @@
     <div class="your-socks flex">
       {{#each socks}}
       <div class="user-sockcard flex" id={{name}}>
-        <img src="./images/testSocks/{{image}}" alt="">
+        <img src={{image}} alt="">
         <secret class="id" id={{_id}}></secret>
       </div>
       {{/each}}
-      <div class="add-new-sock flex">
+      <div id="add-new-sock-div" class="flex">
         <span id="add-new-sock">+</span>
       </div>
     </div>
@@ -29,7 +29,7 @@
       <div class="matching-socks flex">
         {{#each matchingSocks}}
         <div class="each-sock">
-          <img src="./images/testSocks/{{this}}" alt="">
+          <img src={{this}} alt="">
         </div>
         {{/each}}
       </div>
