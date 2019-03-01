@@ -31,6 +31,8 @@ const creatSockForm = () => {
   newForm.setAttribute('method', 'POST');
   // newButton.setAttribute('type', 'button');
   newForm.setAttribute('enctype', 'multipart/form-data');
+  newForm.setAttribute('class', 'flex');
+  newForm.classList.add('column');
   newButton.innerHTML = 'add';
   newInput.setAttribute('type', 'file');
   newInput.setAttribute('name', 'photo');

@@ -1,13 +1,20 @@
 <div class="chat-container flex column">
-  <div id="dom-messages">
-    {{#each chat.messages}}
-    <div class="bullshit message">
-      {{user}}
-      {{message}}
+  <div class="main-chat">
+    <div class="chat-nav flex">
+      <a href="/profile-page">Profile</a>
+      <span>Footsie</span>
+      <a href="/profile-page">Logout</a>
     </div>
-    {{/each}}
+    <div id="dom-messages">
+      {{#each chat.messages}}
+      <div class="bullshit message">
+        {{user}}:
+        {{message}}
+      </div>
+      {{/each}}
+    </div>
   </div>
-  <div class="input">
+  <div class="input flex full-width">
     <input type="text" id="new-message">
     <button id="send-button">Send</button>
   </div>

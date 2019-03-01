@@ -49,9 +49,12 @@ notMatch.addEventListener('click', isNotMatch, false);
 
 // window.document.onload = () => {
 const userSocks = document.getElementsByClassName('user-sockcard');
-let currentSock = userSocks[1].lastElementChild.id;
+let currentSock = userSocks[0].lastElementChild.id;
 
 for (let i = 0; i < userSocks.length; i++) {
+  if (i === 0) {
+    userSocks[i].classList.add('active');
+  }
   userSocks[i].addEventListener(
     'click',
     () => {

@@ -5,7 +5,7 @@ const domMessages = document.getElementById('dom-messages');
 
 const addNewMessage = (user, newmessage) => {
   let newMessageDiv = document.createElement('div');
-  let theNewMessage = `${user} ${newmessage}`;
+  let theNewMessage = `${user}: ${newmessage}`;
   let textNode = document.createTextNode(theNewMessage);
   newMessageDiv.classList.add('message');
   console.log(newMessageDiv, domMessages);
