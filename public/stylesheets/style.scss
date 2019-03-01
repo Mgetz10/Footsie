@@ -460,6 +460,7 @@ body {
   border-radius: 8px;
   width: 70%;
   font-size: 1rem;
+  padding: 2%;
 }
 
 #send-button {
@@ -504,4 +505,8 @@ body {
 .chat-nav a {
   text-decoration: none;
   color: #ffe7e4f0;
+}
+
+.main-chat {
+  width: 100%;
 }
