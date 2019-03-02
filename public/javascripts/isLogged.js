@@ -10,13 +10,13 @@
 
 module.exports = {
   isLoggedIn: function(req, res, next) {
-    console.log('isloggedin', req.isAuthenticated());
+    console.log('isloggedin', req.isAuthenticated())
     if (req.isAuthenticated()) {
-      return next();
+      return next()
     }
-    res.redirect('/login');
+    res.redirect('/login')
   },
   logOut: function() {
-    console.log('hey');
-  }
-};
+    console.log('hey')
+  },
+}

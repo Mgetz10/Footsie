@@ -1,68 +1,68 @@
 //Main functionality
 
 //capture Sock cards and add to array
-const domSockCards = document.getElementsByClassName('sock-card');
-let sockCards = [].slice.call(domSockCards);
+const domSockCards = document.getElementsByClassName('sock-card')
+let sockCards = [].slice.call(domSockCards)
 
 const checkCards = () => {
   for (sock of sockCards) {
-    console.log(sock.innerText);
+    console.log(sock.innerText)
   }
-};
+}
 
-sockCards[0].classList.remove('hide');
+sockCards[0].classList.remove('hide')
 
-const match = document.getElementById('match');
-const notMatch = document.getElementById('not-match');
+const match = document.getElementById('match')
+const notMatch = document.getElementById('not-match')
 const nextCard = () => {
-  sockCards.shift().classList.add('hide');
-  sockCards[0].classList.remove('hide');
-};
+  sockCards.shift().classList.add('hide')
+  sockCards[0].classList.remove('hide')
+}
 const isMatch = () => {
   axios
     .post('/match', {
       sockId: sockCards[0].children[2].innerText,
-      currentSock: currentSock
+      currentSock: currentSock,
     })
     .then(responseFromServer => {
       if (responseFromServer.data.matchResult) {
-        alert("it's a match!!");
+        alert("it's a match!!")
       }
-      console.log(responseFromServer.data.matchResult);
-    });
-  nextCard();
-};
+      console.log(responseFromServer.data.matchResult)
+    })
+  nextCard()
+}
 const isNotMatch = () => {
   axios
     .post('/notmatch', {
       sockId: sockCards[0].children[2].innerText,
-      currentSock: currentSock
+      currentSock: currentSock,
     })
     .then(responseFromServer => {
-      console.log(responseFromServer.data);
-    });
-  nextCard();
-};
+      console.log(responseFromServer.data)
+    })
+  nextCard()
+}
 
-match.addEventListener('click', isMatch, false);
-notMatch.addEventListener('click', isNotMatch, false);
+match.addEventListener('click', isMatch, false)
+notMatch.addEventListener('click', isNotMatch, false)
 
 // window.document.onload = () => {
-const userSocks = document.getElementsByClassName('user-sockcard');
-let currentSock = userSocks[0].lastElementChild.id;
+const userSocks = document.getElementsByClassName('user-sockcard')
+let currentSock = userSocks[0].lastElementChild.id
 
 for (let i = 0; i < userSocks.length; i++) {
   if (i === 0) {
-    userSocks[i].classList.add('active');
+    userSocks[i].classList.add('active')
   }
   userSocks[i].addEventListener(
     'click',
     () => {
-      currentSock = userSocks[i].lastElementChild.id;
-      console.log(currentSock);
+      currentSock = userSocks[i].lastElementChild.id
+      console.log(currentSock)
     },
     false
-  );
+  )
 }
 // switch (userSocks.length) {
 //   case 8:
