@@ -1,60 +1,60 @@
-const express = require('express');
-const authRoutes = express.Router();
-const passport = require('passport');
-const ensureLogin = require('connect-ensure-login');
-const isLoggedIn = require('../public/javascripts/isLogged').isLoggedIn;
+const express = require('express')
+const authRoutes = express.Router()
+const passport = require('passport')
+const ensureLogin = require('connect-ensure-login')
+const isLoggedIn = require('../public/javascripts/isLogged').isLoggedIn
 
 // User model
-const User = require('../models/user');
+const User = require('../models/user')
 
 // Bcrypt to encrypt passwords
-const bcrypt = require('bcrypt');
-const bcryptSalt = 10;
+const bcrypt = require('bcrypt')
+const bcryptSalt = 10
 
 authRoutes.get('/signup', (req, res, next) => {
-  res.render('auth/signup');
-});
+  res.render('auth/signup')
+})
 
 authRoutes.post('/signup', (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
+  const username = req.body.username
+  const password = req.body.password
 
   if (username === '' || password === '') {
-    res.render('auth/signup', { message: 'Indicate username and password' });
-    return;
+    res.render('auth/signup', { message: 'Indicate username and password' })
+    return
   }
 
   User.findOne({ username })
     .then(user => {
       if (user !== null) {
-        res.render('auth/signup', { message: 'The username already exists' });
-        return;
+        res.render('auth/signup', { message: 'The username already exists' })
+        return
       }
 
-      const salt = bcrypt.genSaltSync(bcryptSalt);
-      const hashPass = bcrypt.hashSync(password, salt);
+      const salt = bcrypt.genSaltSync(bcryptSalt)
+      const hashPass = bcrypt.hashSync(password, salt)
 
       const newUser = new User({
         username,
-        password: hashPass
-      });
+        password: hashPass,
+      })
 
       newUser.save(err => {
         if (err) {
-          res.render('auth/signup', { message: 'Something went wrong' });
+          res.render('auth/signup', { message: 'Something went wrong' })
         } else {
-          res.redirect('/profile-page');
+          res.redirect('/profile-page')
         }
-      });
+      })
     })
     .catch(error => {
-      next(error);
-    });
-});
+      next(error)
+    })
+})
 
 authRoutes.get('/login', (req, res, next) => {
-  res.render('auth/login', { message: req.flash('error') });
-});
+  res.render('auth/login', { message: req.flash('error') })
+})
 
 authRoutes.post(
   '/login',
@@ -62,14 +62,14 @@ authRoutes.post(
     successRedirect: '/profile-page',
     failureRedirect: '/login',
     failureFlash: true,
-    passReqToCallback: true
+    passReqToCallback: true,
   })
-);
+)
 
 authRoutes.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/login');
-});
+  req.logout()
+  res.redirect('/login')
+})
 
-module.exports = authRoutes;
+module.exports = authRoutes
 // module.exports = isLoggedIn();

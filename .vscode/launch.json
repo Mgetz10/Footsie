@@ -4,10 +4,10 @@
     {
       "type": "node",
       "request": "attach",
-      "name": "DEBUG Irongenerate",
+      "name": "dev",
       "port": 9229,
       "protocol": "inspector",
-      "restart": "true"
+      "restart": true
     }
   ]
 }

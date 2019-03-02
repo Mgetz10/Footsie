@@ -1,10 +1,10 @@
 function containsSock(obj, list) {
   for (let i = 0; i < list.length; i++) {
     if (list[i] === obj) {
-      return true;
+      return true
     }
   }
-  return false;
+  return false
 }
 
-module.exports = containsSock;
+module.exports = containsSock

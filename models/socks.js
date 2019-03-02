@@ -1,6 +1,6 @@
 // models/socks.js
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const socksSchema = new Schema(
   {
@@ -9,15 +9,15 @@ const socksSchema = new Schema(
     name: String,
     image: {
       type: String,
-      default: '1.jpeg'
+      default: '1.jpeg',
     },
-    socksMatching: [String]
+    socksMatching: [String],
   },
   {
-    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
+    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
   }
-);
+)
 
-const Sock = mongoose.model('socks', socksSchema);
+const Sock = mongoose.model('socks', socksSchema)
 
-module.exports = Sock;
+module.exports = Sock
