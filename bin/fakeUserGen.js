@@ -19,7 +19,7 @@ mongoose.connect(
 //   .catch();
 
 sockCounter = 0;
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < 20; i++) {
   let password = String(i);
   const salt = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
