@@ -16,7 +16,6 @@ router.get('/', isLoggedIn, (req, res, next) => {
 router.get('/profile-page', isLoggedIn, (req, res) => {
   Sock.find({ user_id: req.user._id }).then(profileSocks => {
     Chat.find({ user_ids: req.user._id }).then(chats => {
-      // console.log('in chats', req.user);
       res.render('myprofile.hbs', {
         socks: profileSocks,
         user: req.user,
@@ -39,13 +38,9 @@ router.post('/addsock', uploadCloud.single('photo'), (req, res, next) => {
 });
 
 router.post('/removesock', (req, res, next) => {
-  //uploadCloud.single(url)
-  // console.log(req.body.sockId);
   Sock.findById(req.body.sockId)
     .then(sockToDelete => {
-      // console.log('broke sock');
       User.findById(sockToDelete.user_id).then(sockToDeleteUser => {
-        // console.log('broke user');
         sockToDeleteUser
           .update({ $pull: { socks: sockToDeleteUser._id } })
           .then(() => {
@@ -60,18 +55,15 @@ router.post('/removesock', (req, res, next) => {
 router.post('/match', isLoggedIn, (req, res, next) => {
   //Add liked sock to array
   Sock.findById(req.body.currentSock).then(sock => {
-    // console.log('whats......', req.body.sockId);
     sock.socksMatching.push(req.body.sockId);
     sock.save();
     Sock.findById(req.body.sockId).then(otherSock => {
-      // console.log(`othersock: ${otherSock.socksMatching}, sock: ${sock._id}`);
       if (otherSock.socksMatching.includes(req.body.currentSock)) {
         let chat = new Chat();
         chat.matchingSocks.push(otherSock.image, sock.image);
         chat.user_ids.push(sock.user_id, otherSock.user_id);
         chat.usernames.push(sock.sockOwner, otherSock.sockOwner);
         chat.save().then(room => {
-          // console.log('save this ', room._id, ' to each user');
           User.findById(sock.user_id).then(sockUser => {
             sockUser.chats.push(room._id);
             sockUser.save();
@@ -93,7 +85,6 @@ router.post('/match', isLoggedIn, (req, res, next) => {
 router.post('/notmatch', isLoggedIn, (req, res, next) => {
   res.json({ burgerking: true });
   User.findById(req.user._id).then(user => {
-    // console.log('whats......', req.body.sockId);
     user.socksNotMatching.push(req.body.sockId);
     user.save();
   });
@@ -106,7 +97,6 @@ router.get('/socks', isLoggedIn, (req, res, next) => {
       user_id: req.user._id
     }).then(mySocks => {
       for (sock of sockHandfull) {
-        // User.findById(sock.user_id).then(user => {
         console.log(sock.user_id, 'user: ', req.user._id);
         // Check if card not current user
         if (String(sock.user_id) === String(req.user._id)) {
@@ -117,39 +107,6 @@ router.get('/socks', isLoggedIn, (req, res, next) => {
         if (req.user.socksNotMatching.includes(String(sock._id))) {
           continue;
         }
-
-        // Check if user has already matched
-        // console.log(
-        //   'piss and shit',
-        //   mySocks,
-        //   'poo poo and pee pee',
-        //   sock.socksMatching
-        // );
-        //   for (mySocks of mySocks) {
-        //     if (sock.socksMatching.includes(String(mySock._id))) {
-        //       console.log('It Worked!');
-        //       continue;
-        //     }
-        // }
-
-        /*  NEW APPROACH NEEDED (CHECK BEFORE FOR LOOP?)
-        // Check if other user has disliked current user
-        let allSocksNotMatching = true;
-        User.findById(sock.user_id).then(thisUser => {
-          for (mySock of mySocks) {
-            if (!thisUser.socksNotMatching.includes(mySock)) {
-              allSocksNotMatching = false;
-              break;
-            }
-          }
-        });
-
-        if (allSocksNotMatching) {
-          console.log('urDUMN');
-          continue;
-        }
-        */
-
         socks.push(sock);
       }
       res.render('socks', {

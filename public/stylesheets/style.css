@@ -5,14 +5,19 @@
 
 .background-image {
   height: 100%;
+  max-width: 780px;
   width: 100%;
   position: absolute;
   background: url(https://cdn.dribbble.com/users/26407/screenshots/3813047/small_pattern-bg.jpeg);
-  z-index: -1; }
+  z-index: -1;
+  background-size: cover;
+  opacity: 0.9; }
 
 html,
 body {
-  height: 100%; }
+  height: 100%;
+  max-width: 780px;
+  margin: 0 auto; }
 
 body {
   background: #ffe7e4;
@@ -160,7 +165,8 @@ body {
 
 .next-nav a {
   text-decoration: none;
-  color: teal; }
+  color: teal;
+  font-size: 1.5rem; }
 
 .next-nav div {
   font-size: 1.1rem;
@@ -171,8 +177,9 @@ body {
   text-align: right; }
 
 .nav h3 {
-  font-size: 1.3rem;
-  color: teal; }
+  font-size: 1.7rem;
+  color: teal;
+  text-shadow: #00000012 3px 2px 2px; }
 
 .your-socks-container {
   width: 90%;
@@ -243,7 +250,8 @@ body {
   box-shadow: 0 0 13px #808080c7; }
 
 .socks-nav a {
-  color: teal; }
+  color: teal;
+  font-size: 1.5rem; }
 
 .socks-page-container img,
 .socks-page-container span {
@@ -265,7 +273,8 @@ body {
   width: 90%;
   height: 65%;
   justify-content: space-between;
-  overflow: hidden; }
+  overflow: hidden;
+  max-width: 497px; }
 
 .socks > div {
   margin: 3% 0; }
@@ -345,14 +354,16 @@ body {
   box-shadow: 0 0 8px #80808078;
   background: #ffe7e4e6;
   border: solid 1px #808080c4;
-  margin-bottom: 3%; }
+  margin-bottom: 3%;
+  max-width: 600px; }
 
 .user-sockcard {
   height: 100%; }
 
 .socks-page-container h3 {
-  font-size: 1.3rem;
-  color: teal; }
+  font-size: 1.7rem;
+  color: teal;
+  text-shadow: #0000001c 3px 2px 2px; }
 
 .user-sockcard img {
   border-radius: 50%;
@@ -428,5 +439,10 @@ body {
 
 .main-chat {
   width: 100%; }
+
+@media only screen and (min-width: 780px) {
+  .background-image {
+    border: 3px #0000008c solid;
+    border-radius: 5px; } }
 
 /*# sourceMappingURL=style.css.map */

@@ -16,7 +16,5 @@ module.exports = {
     }
     res.redirect('/login');
   },
-  logOut: function() {
-    console.log('hey');
-  }
+  logOut: function() {}
 };

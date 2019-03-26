@@ -8,7 +8,6 @@ const addNewMessage = (user, newmessage) => {
   let theNewMessage = `${user}: ${newmessage}`;
   let textNode = document.createTextNode(theNewMessage);
   newMessageDiv.classList.add('message');
-  console.log(newMessageDiv, domMessages);
   newMessageDiv.appendChild(textNode);
   domMessages.appendChild(newMessageDiv);
 };
