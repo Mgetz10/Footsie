@@ -26,29 +26,48 @@ router.get('/profile-page', isLoggedIn, (req, res) => {
 });
 
 router.post('/addsock', uploadCloud.single('photo'), (req, res, next) => {
-  //uploadCloud.single(url)
   const newSock = new Sock({
     user_id: req.user._id,
     sockOwner: req.user.username,
     name: `Sock-${req.user.socks.length + 1}`,
     image: req.file.url
   });
-  newSock.save();
+  newSock.save().then(newSockWithId => {
+    User.findOneAndUpdate(
+      { _id: req.user },
+      { $push: { socks: newSockWithId._id } },
+      { new: true }
+    ).then(pow => {
+      console.log(pow);
+    });
+  });
   res.redirect('/profile-page');
 });
 
 router.post('/removesock', (req, res, next) => {
-  Sock.findById(req.body.sockId)
-    .then(sockToDelete => {
-      User.findById(sockToDelete.user_id).then(sockToDeleteUser => {
-        sockToDeleteUser
-          .update({ $pull: { socks: sockToDeleteUser._id } })
-          .then(() => {
-            sockToDelete.remove().exec();
-          });
-      });
+  // res.redirect('/profile-page');
+  console.log('showt', req.body.sockId);
+  User.findOneAndUpdate(
+    { _id: req.user },
+    { $pull: { socks: req.body.sockId } },
+    { new: true }
+  )
+    .then(newres => {
+      console.log('shh', newres);
+      Sock.findById(req.body.sockId)
+        .then(sockToDelete => {
+          console.log(sockToDelete._id, typeof sockToDelete.id);
+          Sock.findByIdAndDelete({ _id: sockToDelete._id })
+            .then(response => {
+              console.log(response, sockToDelete._id);
+              // res.json({ itsallgoingdown: true });
+            })
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
     })
-    .then(res.send('coolshit'));
+    .then(res.send('cool'))
+    .catch(err => console.log(err));
   //save to db
 });
 

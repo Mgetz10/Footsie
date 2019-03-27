@@ -14,7 +14,10 @@
         {{#each socks}}
         <div class="profile-user-sockcard flex" id={{name}}>
           <img src={{image}} alt="">
-          <secret class="id" id={{_id}}></secret>
+          <secret class="id" id='id'>{{_id}}</secret>
+          <div class="ex-div">
+            <span class="exes">×</span>
+          </div>
         </div>
         {{/each}}
         <div id="add-new-sock-div" class="flex">
@@ -27,6 +30,17 @@
   </div>
   <div class="profile-footer flex full-width column">
     <h3>Matches</h3>
+    <div class="chat-tags flex full-width">
+      {{#each chats}}
+      <div class="chat-tags-two flex">
+        {{#each usernames}}
+        <div>
+          {{this}}
+        </div>
+        {{/each}}
+      </div>
+      {{/each}}
+    </div>
     <div class="matching-socks flex full-width">
       {{#each chats}}
       <div class="match-block flex">

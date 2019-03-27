@@ -5,9 +5,6 @@
   box-sizing: border-box;
 }
 
-html {
-}
-
 .background-image {
   height: 100%;
   max-width: 780px;
@@ -305,6 +302,8 @@ body {
 .socks-page-container img,
 .socks-page-container span {
   display: block;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .delete {
@@ -522,9 +521,46 @@ body {
   width: 100%;
 }
 
+.chat-tags {
+  justify-content: space-around;
+}
+
+.chat-tags-two {
+  width: 50%;
+  justify-content: space-around;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-shadow: 0px 0px 6px black;
+}
+
+.sock-image-div {
+  max-height: 84%;
+}
 @media only screen and (min-width: 780px) {
   .background-image {
     border: 3px #0000008c solid;
     border-radius: 5px;
   }
+}
+
+@media only screen and (min-width: 780px) {
+  .background-image {
+    border: 3px #0000008c solid;
+    border-radius: 5px;
+  }
+
+  .chat-tags-two {
+    font-size: 1.5rem;
+  }
+}
+
+.ex-div {
+  height: 81%;
+  display: flex;
+  align-items: flex-end;
+  font-size: 5rem;
+  color: #ffffffb3;
+  text-shadow: 1px 1px 1px #0000005e;
+  margin-left: -20px;
 }
