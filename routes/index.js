@@ -26,6 +26,10 @@ router.get('/profile-page', isLoggedIn, (req, res) => {
 });
 
 router.post('/addsock', uploadCloud.single('photo'), (req, res, next) => {
+  if (!req.file) {
+    console.log('LSKDJLKDJFHJ');
+    res.redirect('/profile-page');
+  }
   const newSock = new Sock({
     user_id: req.user._id,
     sockOwner: req.user.username,
@@ -45,7 +49,6 @@ router.post('/addsock', uploadCloud.single('photo'), (req, res, next) => {
 });
 
 router.post('/removesock', (req, res, next) => {
-  // res.redirect('/profile-page');
   console.log('showt', req.body.sockId);
   User.findOneAndUpdate(
     { _id: req.user },
@@ -60,7 +63,6 @@ router.post('/removesock', (req, res, next) => {
           Sock.findByIdAndDelete({ _id: sockToDelete._id })
             .then(response => {
               console.log(response, sockToDelete._id);
-              // res.json({ itsallgoingdown: true });
             })
             .catch(err => console.log(err));
         })
@@ -68,7 +70,7 @@ router.post('/removesock', (req, res, next) => {
     })
     .then(res.send('cool'))
     .catch(err => console.log(err));
-  //save to db
+  // res.redirect('/profile-page');
 });
 
 router.post('/match', isLoggedIn, (req, res, next) => {

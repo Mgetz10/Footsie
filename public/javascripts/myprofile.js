@@ -24,22 +24,28 @@ const createSockForm = () => {
 };
 const userSockCards = document.getElementsByClassName('user-sockcard');
 if (document.getElementById('id')) {
+  const newSockCards = document.getElementsByClassName('profile-user-sockcard');
+  console.log(newSockCards);
   const domExes = document.getElementsByClassName('exes');
-  const exes = [].slice.call(domExes);
-  const deleteSock = () => {
-    let currentSock = document.getElementById('id').innerHTML;
-    console.log('ok', currentSock);
-    axios
-      .post('/removesock', {
-        sockId: currentSock
-      })
-      .then(responseFromServer => {
-        console.log(responseFromServer);
-      });
-  };
-  exes.forEach(element => {
-    element.addEventListener('click', deleteSock, false);
-  });
+  let currentSock = newSockCards[0].children[1].innerHTML;
+  for (let i = 0; i < domExes.length; i++) {
+    domExes[i].addEventListener(
+      'click',
+      () => {
+        currentSock = newSockCards[i].children[1].innerHTML;
+        console.log('ok', currentSock);
+        axios
+          .post('/removesock', {
+            sockId: currentSock
+          })
+          .then(responseFromServer => {
+            console.log(responseFromServer);
+          })
+          .then(window.location.replace(window.location.href));
+      },
+      false
+    );
+  }
 }
 
 function getElementIndex(node) {
