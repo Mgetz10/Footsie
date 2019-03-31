@@ -27,7 +27,6 @@ router.get('/profile-page', isLoggedIn, (req, res) => {
 
 router.post('/addsock', uploadCloud.single('photo'), (req, res, next) => {
   if (!req.file) {
-    console.log('LSKDJLKDJFHJ');
     res.redirect('/profile-page');
   }
   const newSock = new Sock({
@@ -41,30 +40,23 @@ router.post('/addsock', uploadCloud.single('photo'), (req, res, next) => {
       { _id: req.user },
       { $push: { socks: newSockWithId._id } },
       { new: true }
-    ).then(pow => {
-      console.log(pow);
-    });
+    );
   });
   res.redirect('/profile-page');
 });
 
 router.post('/removesock', (req, res, next) => {
-  console.log('showt', req.body.sockId);
   User.findOneAndUpdate(
     { _id: req.user },
     { $pull: { socks: req.body.sockId } },
     { new: true }
   )
     .then(newres => {
-      console.log('shh', newres);
       Sock.findById(req.body.sockId)
         .then(sockToDelete => {
-          console.log(sockToDelete._id, typeof sockToDelete.id);
-          Sock.findByIdAndDelete({ _id: sockToDelete._id })
-            .then(response => {
-              console.log(response, sockToDelete._id);
-            })
-            .catch(err => console.log(err));
+          Sock.findByIdAndDelete({ _id: sockToDelete._id }).catch(err =>
+            console.log(err)
+          );
         })
         .catch(err => console.log(err));
     })
@@ -118,7 +110,6 @@ router.get('/socks', isLoggedIn, (req, res, next) => {
       user_id: req.user._id
     }).then(mySocks => {
       for (sock of sockHandfull) {
-        console.log(sock.user_id, 'user: ', req.user._id);
         // Check if card not current user
         if (String(sock.user_id) === String(req.user._id)) {
           continue;

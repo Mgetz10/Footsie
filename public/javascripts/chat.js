@@ -33,7 +33,6 @@ const updateMessages = () => {
         addNewMessage(newMessages[i].user, newMessages[i].message);
       }
     }
-    // console.log(newMessages.length !== domMessages.childElementCount);
   });
 };
 setInterval(updateMessages, 100);
